@@ -1,6 +1,8 @@
 # TodoList
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.7.
+It is my version of the example in https://www.youtube.com/watch?v=VjlaWksdpWM to familiarize myself with angular and to create my first crud app. The main differences are the following:
+* I use ng-boostrap instead of tailwind
 
 ## Development server
 
