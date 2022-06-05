@@ -7,4 +7,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'todo_list';
+
+  todo_test = [
+    {
+      todo_key: 'programming',
+      todo_status: false
+    },
+    {
+      todo_key: 'cleaning',
+      todo_status: true
+    },
+    { 
+      todo_key: 'learning',
+      todo_status: false
+    }
+  ];
 }

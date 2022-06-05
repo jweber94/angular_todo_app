@@ -74,7 +74,23 @@ export class AppComponent {
   - Here, the `app.module.ts` is included to make it run on startup of the web app! 
   - Used for the JIT Compilation (Just In Time)
   - In `platformBrowserDynamic().bootstrapModule(AppModule).catch()...`, the bootstrapping module will be defined (this is done by angular if you initialize everything with the angular CLI)
-  - After the `$ ng build` is executed, the `index.html` got enhanced with (one of a lot) tags, where the `main.js` (which is generated from the `main.ts`) is included as a script at the end of the file (See developertools of your browser) 
+  - After the `$ ng build` is executed, the `index.html` got enhanced with (one of a lot) tags, where the `main.js` (which is generated from the `main.ts`) is included as a script at the end of the file (See developertools of your browser)
++ In `./src/styles.css`, we can add project wide CSS styles!
+  - If you add styles to the `app.component.css` (or other components), the styles are only applied to the individual component!
++ Angular components have completly independend scopes from each other
+  - The do not know any variables, classes or class members of each other
+  - The linking has to be done manually
+  - ***To make one or two way binding of html tag attributes, we need to use the `@Input() membervar = {string_test: '', bool_test=false}` Decorator!***
+    + The `()` after the decorator name means, that it is executed
+    + _Now, angular knows, that we want to hand over the class member variale membervar by the html tag from outside the component!_
+    + To compile the code, you might need to import the Input decorator by adding `Input` to `import { Component, OnInit, Input } from '@angular/core';` of the importing component
+  - ***To hand over the parameters from outside the component, we need to do "Property Binding"! This is done by square brackets***
+    - Example: `<app-todo [todo_data]="{todo_key: 'testing', todo_status: false}"></app-todo>`
+      * You can also hand over data from the typescript file of the parental component, if it has the correct datastructure! 
++ Angular directives:
+  - A directive is a build in functiontionallity that can be applied to html tags
+    * Examples: `*ngrepeat`, `*ngfor`, ...
+    * Directives are divided into structural and attributal directives
 
 ## Example: CRUD app ToDo-List
 + Angular > version 2 gets installed by npm which is a part of nodejs
@@ -82,6 +98,14 @@ export class AppComponent {
   - `$ npm update && npm install --save --legacy-peer-deps @ng-bootstrap/ng-bootstrap && ng add @ng-bootstrap/ng-bootstrap`
   - See https://stackoverflow.com/questions/69433250/install-ngbootstrap-error-could-not-resolve-dependency
   - After doing this, we need to rebuild the project to make the changes working properly (if you don't do this, you'll run into an compiler error)
+    * ***CAUTION:*** After we installed a new package with npm, we need to do a development server hard reset (i.e. we need to stop and restart the dev server with ctrl+c and then start the server again with `$ ng serve`)
++ If we create new components with `$ ng generate component <name>`, a new folder will be created under the `/src/app/<name>` folder.
+  - The `*.spec.ts` file is only for testing (aka unit testing)
+
+# ToDo App
++ Create a new angular component (additionally to the root component)
+  - `$ ng generate component todo`
+
 
 ## Javascript / Typescript Tipps:
 + Template Strings: 
@@ -93,3 +117,4 @@ export class AppComponent {
       - Requirement: message is a variable (i.e. class member variable) 
 + Decorator names are written with a capital letter in front of its name
 + If your typescript code (independend of angular) does not compile while you programmed your own decorator, you need to incomment the line "experimental-decorators" in the `tsconfig.json` file.
++ Borders of `<div>` tags could be used to generate borders around parts of a container div (like the top section of the todo list)
