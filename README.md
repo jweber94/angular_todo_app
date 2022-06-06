@@ -21,3 +21,9 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## ToDos
++ Make the github pages working
++ Clear the input after adding a todo
++ Dockerize with nginx to run locally in a deployment version
++ Bugfix: Save to local storage does not work with the delete button
