@@ -91,6 +91,52 @@ export class AppComponent {
   - A directive is a build in functiontionallity that can be applied to html tags
     * Examples: `*ngrepeat`, `*ngfor`, ...
     * Directives are divided into structural and attributal directives
++ Event binding with angular:
+  - If we want to do something on an event, we need to use an angular event directive, like `(click)`
+    * These events are normal DOM events
++ Changing data from the calling html/`component.ts` of a component: Use the `@Output` decorator with an event emitter
+  - Event emitters are generics in typescript (aka templates if you need the regard to C++)
+  - The event emitter emits an event with the defined data (datatype by the template argument)
+  - We need to bind the emitted event data to a function of the calling html tag to it's typescript class
+    * Example: 
+      - 1.: Emit the data via the `@Output() data = new EventEmitter<number>();` decorator as a class member
+      - 2.: Bind the data to a function of the calling component.
+        * `... (todoIndex)="functionNameCallingComponent($event)"></app-component>`
+        * Here we bind the output of the class variable (that is `@Output()` decorated) to the function of the calling `app.component.ts`
+        * The `$event` service gives us the data of the event emitter back
+      - Define the function (i.e. `functionNameCallingComponent(idx: number): void {...}`) within the typescript class of the calling component
+
++ ***Summary: Letting angular component exchange data***
+  - Square brackets: Used to input data to the `@Input()` decorated class member (Data from the calling component to the called component) 
+  - Round brackets: Used to outout data to the calling component via the `@Output()` decorated class member.
+    * It needs to be handed over via the `$event` angular service as parameter to the assigned function of the calling `*.component.ts`    
+
++ Input data from HTML `<input>`-Tag:
+```
+<div class="py-2">
+    <input type="text" class="w-50 mx-2" (keyup)="setToDo($event)"/>
+    <button class="btn btn-dark px-1 py-1" (click)="appendToTodo(this.add_todo_str)">Add</button>
+</div>
+```
+  * The `keyup` event is an angular directive that triggers the function after every keystroke
+    - The event contains the complete input string (*not* just the last letter that invoked the function)
+  * No input-Binding is done, since we use event handler directives to hand over the data
+    - ***Input Binding is only used if we need to insert members of component classes. If we need to input user inputs, we use input directives!***
+  * `(keyup.enter)="functionName()"` --> Executes the function on pressing enter (e.g. if you want to "Send a message on every enter press")
+  * If you work with user input, make sure that you do some input checking like "No empty inputs"
++ `localStorage` of a browser instance:
+  - More infos: https://blog.logrocket.com/localstorage-javascript-complete-guide/#:~:text=localStorage%20is%20a%20property%20that,the%20browser%20window%20is%20closed.
+  - Is a sqlite database that lives within the browser instance
+  - Web apps could save data in there, as long as the browser cache is not deleted
+  - We can store data and recover data there
+  - Ideally, we save stringified json data in there
+  - ***To recover the data from the localStorage, we can use so called lifecycle hooks:***
+    * `OnInit()` is the lifecycle hook for the starting of your web app (you can also implement lifecycle hooks on closing tabs, etc)
+      - Add to the component class the `implements OnInit()` extension (see `app.component.ts` for details)
++ ***Dependency injection and services***:
+  - Services are used to exchange data between component and reuse functions to realize the DRY paradigm
+  - Create a service with `$ ng generate service logging`
+  
 
 ## Example: CRUD app ToDo-List
 + Angular > version 2 gets installed by npm which is a part of nodejs
