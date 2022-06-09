@@ -31,7 +31,5 @@ I needed to type the following:
 Make sure to create the `404.html` file in the `/docs` folder to make the github pages deployment work properly. 
 
 ## ToDos
-+ Make the github pages working
-+ Clear the input after adding a todo
++ Rename ToDo to Shopping List to make my app a little more unique
 + Dockerize with nginx to run locally in a deployment version
-+ Bugfix: Save to local storage does not work with the delete button

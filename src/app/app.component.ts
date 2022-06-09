@@ -55,6 +55,7 @@ export class AppComponent implements OnInit{
   deleteToDo(idx: number): void {
     this.logging("Deleteing todo " + this.todo_test[idx].todo_key);
     this.todo_test.splice(idx, 1);
+    this.storeToDos(); 
   }
 
   setToDo(event: KeyboardEvent): void {
@@ -85,7 +86,7 @@ export class AppComponent implements OnInit{
   }
 
   clearEntry(): void {
-    this.inputEntry.nativeElement.value = ' ';
+    this.inputEntry.nativeElement.value = '';
   }
 
 }
