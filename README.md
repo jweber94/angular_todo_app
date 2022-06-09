@@ -22,6 +22,9 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
+## Deployment on github pages
+See https://angular.io/guide/deployment#deploy-to-github-pages
+
 ## ToDos
 + Make the github pages working
 + Clear the input after adding a todo
