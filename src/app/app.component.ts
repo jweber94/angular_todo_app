@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoggingService } from './logging.service';
+
 
 // needs to be defined to initialize a valid todo_test array with the correct datatype
 interface ITodoElement {
@@ -14,6 +15,8 @@ interface ITodoElement {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+
+  @ViewChild('entry') inputEntry: any; // accessing the reference element
   
   constructor (private logger: LoggingService) {
 
@@ -75,4 +78,14 @@ export class AppComponent implements OnInit{
     );
     return undone_todos.length;
   }
+
+  resetAll(): void {
+    this.todo_test.splice(0, this.todo_test.length);
+    this.storeToDos(); // save the current todo list status
+  }
+
+  clearEntry(): void {
+    this.inputEntry.nativeElement.value = ' ';
+  }
+
 }

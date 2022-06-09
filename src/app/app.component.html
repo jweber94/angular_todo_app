@@ -6,8 +6,9 @@
             <p>Open ToDos: {{ getNumOpenTodos() }}</p>
             <!-- Add section for the todos -->
             <div class="py-2">
-                <input type="text" class="w-50 mx-2" (keyup)="setToDo($event)" (keyup.enter)="appendToTodo(this.add_todo_str)"/>
-                <button class="btn btn-dark px-1 py-1" (click)="appendToTodo(this.add_todo_str)">Add</button>
+                <input type="text" class="w-50 mx-2" (keyup)="setToDo($event)" (keyup.enter)="appendToTodo(this.add_todo_str)" (keyup.enter)="clearEntry()" #entry required/>
+                <button class="btn btn-dark px-1 py-1" (click)="appendToTodo(this.add_todo_str)" (click)="clearEntry()">Add</button>
+                <button class="btn btn-danger px-1 py-1 mx-2" (click)="resetAll()">Reset all</button>
             </div>
         </div>
 

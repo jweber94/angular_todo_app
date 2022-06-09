@@ -25,6 +25,11 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Deployment on github pages
 See https://angular.io/guide/deployment#deploy-to-github-pages
 
+I needed to type the following:
+`$ ng build --output-path docs --base-href /angular_todo_app/ && cp docs/index.html docs/404.html`
+
+Make sure to create the `404.html` file in the `/docs` folder to make the github pages deployment work properly. 
+
 ## ToDos
 + Make the github pages working
 + Clear the input after adding a todo
