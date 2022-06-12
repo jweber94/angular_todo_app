@@ -1,48 +1,54 @@
 # Angular 17 Tutorial
 
 ## Basics of Angular
-+ Angular is a javascript framework that implements a model-view-controller scheme
-+ Angular is mostly used in enterprice software
-+ It is the most complex modern MVC-framework
-+ It uses typescript (A more strongly typed version of javascript)
+
+- Angular is a javascript framework that implements a model-view-controller scheme
+- Angular is mostly used in enterprice software
+- It is the most complex modern MVC-framework
+- It uses typescript (A more strongly typed version of javascript)
 
 ### Typescript
-+ See [](https://github.com/jweber94/Tutorials/tree/master/typescript/intro_project)
+
+- See [](https://github.com/jweber94/Tutorials/tree/master/typescript/intro_project)
 
 ### Installation
-+ With npm (Nodejs Package Manager)
+
+- With npm (Nodejs Package Manager)
   - Comes with a nodejs installation
   - `$ npm install -g @angular/cli`
   - Make sure you have nodejs v12.20 or newer installed
-+ Start your angular project by createing a new folder and then type
+- Start your angular project by createing a new folder and then type
   - `$ ng new my_angular_project`
   - This will ask you a few questions how you want your project to be structured. After it is finished, the angular project is created
-    * Go to the folder to inspect this
+    - Go to the folder to inspect this
+
 ### Basic Angular Project structure
-+ Folder "node_modules":
+
+- Folder "node_modules":
   - nodejs packages that are needed for the project. Do not touch this folder! It will be managed by `npm` and `ng`
   - They should NOT be checked in into git, since npm installs all this dependencies if we say `ng build`
-    * `ng build` creates a production build
-+ `package.json`
+    - `ng build` creates a production build
+- `package.json`
   - Defines dependencies and scripts for the development as well as for the case if we want to roll it out
   - Scripts:
-    * `ng serve`: Start the development server
-    * `ng build`: Transpile project to a deployable version
-+ `tsconfig.json`
+    - `ng serve`: Start the development server
+    - `ng build`: Transpile project to a deployable version
+- `tsconfig.json`
   - Defines the typescript configuration
   - Settings for the transpiling process in case of the `ng build` execution
   - Here we could enable experimental decorators (if we write our own decorators!)
-+ `src` Folder - Here comes the important part
-  - `src/app`: Here are the ***components*** stored
-    * By default, there is only the root component (called `app-route`)
-  - In the source folder is an `index.html`, which has only the `<app-route>` html tag within its body, which is defined by the angular root  component 
-+ Route component and basics of components:
-  - We have a `.css` file for every component. Within this `.css` we can write CSS code to style out component. 
-  - We do ***NOT*** need to say `<link rel="stylesheet" href="/path/to/component.css">`, since angular integrates this CSS file automatically to our component! (The stylesheet linking is done by angular in the backend/during `ng build`)
-+ `app.component.ts`:
+- `src` Folder - Here comes the important part
+  - `src/app`: Here are the **_components_** stored
+    - By default, there is only the root component (called `app-route`)
+  - In the source folder is an `index.html`, which has only the `<app-route>` html tag within its body, which is defined by the angular root component
+- Route component and basics of components:
+  - We have a `.css` file for every component. Within this `.css` we can write CSS code to style out component.
+  - We do **_NOT_** need to say `<link rel="stylesheet" href="/path/to/component.css">`, since angular integrates this CSS file automatically to our component! (The stylesheet linking is done by angular in the backend/during `ng build`)
+- `app.component.ts`:
   - This is the main typescript file where the logic of our component is stored
   - Angular extensively uses classes and decorators!
-    * We define a class and export it (export means, that we tell the javascript engine to make the class available in our complete project! - https://stackoverflow.com/questions/15760462/why-does-typescript-use-the-keyword-export-to-make-classes-and-interfaces-publ for more details)
+    - We define a class and export it (export means, that we tell the javascript engine to make the class available in our complete project! - https://stackoverflow.com/questions/15760462/why-does-typescript-use-the-keyword-export-to-make-classes-and-interfaces-publ for more details)
+
 ```
 @Component({
   selector: 'app-route',
@@ -54,113 +60,120 @@ export class AppComponent {
   // here comes our app-logic implementation
 }
 ```
-    * This class uses the Component decorator (= functionallity enhancer - a decorator defines a function that is executed whenever a class method is invoked. The parameters of the decorator can be defined by class members. See the typescript tutorial for details on decorators) 
 
-+ An angular component is a concatination of a html template and some logic for the template
+    * This class uses the Component decorator (= functionallity enhancer - a decorator defines a function that is executed whenever a class method is invoked. The parameters of the decorator can be defined by class members. See the typescript tutorial for details on decorators)
+
+- An angular component is a concatination of a html template and some logic for the template
   - The logic is implemented within the `app.component.ts` (or more generally `name.component.ts`)
   - The HTML structure is defined by the `app.component.html`
   - To make the component visible to all angular components, we define the component code package with the `app.module.ts`
   - Components are defined by typescript decorators
-    * Decorators are like base classes that could be enhanced by out code to implement additional functionallities
-    * In the common case, we define a component by using the `Component` decorator from the `@angular/core` library
-  - *The `selector` element of a component defines the custom html tag!* --> This can be used in the `./src/index.html` as our own custom HTML tag!
-    * If we define more components (aka functionallities + custom html tag), we can use them in the app.component.html or other components to create more sorphisticated tags or websites
+    - Decorators are like base classes that could be enhanced by out code to implement additional functionallities
+    - In the common case, we define a component by using the `Component` decorator from the `@angular/core` library
+  - _The `selector` element of a component defines the custom html tag!_ --> This can be used in the `./src/index.html` as our own custom HTML tag!
+    - If we define more components (aka functionallities + custom html tag), we can use them in the app.component.html or other components to create more sorphisticated tags or websites
   - In the `app.module.ts`, we export a class (that is mainly defined by the `@NgModule` decorator), which contains our component code (i.e. of the AppComponent, we define `declarations: {AppComponent}`)
-    * _AppComponent *must* exactly correspond to the exported class within the `app.component.ts` file!_
-    * If new components are generated by the angular CLI, all component declarations get updated such that we can use it in the complete angular project!
-    * If we add new libraries with `$ ng add` (e.g. ng-bootstrap), these libraries get automatically included to the `imports: [BrowserModule, NgbModule]` part of the `NgModule` Decoration within the `app.module.app`
-    * The `bootstrap: [AppComponent]` of the `NgModule` decorator is used to tell the angular framework what it should use on bootstrapping (aka startup of the app)
-+ `./src/main.ts`:
-  - Here, the `app.module.ts` is included to make it run on startup of the web app! 
+    - _AppComponent *must* exactly correspond to the exported class within the `app.component.ts` file!_
+    - If new components are generated by the angular CLI, all component declarations get updated such that we can use it in the complete angular project!
+    - If we add new libraries with `$ ng add` (e.g. ng-bootstrap), these libraries get automatically included to the `imports: [BrowserModule, NgbModule]` part of the `NgModule` Decoration within the `app.module.app`
+    - The `bootstrap: [AppComponent]` of the `NgModule` decorator is used to tell the angular framework what it should use on bootstrapping (aka startup of the app)
+- `./src/main.ts`:
+  - Here, the `app.module.ts` is included to make it run on startup of the web app!
   - Used for the JIT Compilation (Just In Time)
   - In `platformBrowserDynamic().bootstrapModule(AppModule).catch()...`, the bootstrapping module will be defined (this is done by angular if you initialize everything with the angular CLI)
   - After the `$ ng build` is executed, the `index.html` got enhanced with (one of a lot) tags, where the `main.js` (which is generated from the `main.ts`) is included as a script at the end of the file (See developertools of your browser)
-+ In `./src/styles.css`, we can add project wide CSS styles!
+- In `./src/styles.css`, we can add project wide CSS styles!
   - If you add styles to the `app.component.css` (or other components), the styles are only applied to the individual component!
-+ Angular components have completly independend scopes from each other
+- Angular components have completly independend scopes from each other
   - The do not know any variables, classes or class members of each other
   - The linking has to be done manually
-  - ***To make one or two way binding of html tag attributes, we need to use the `@Input() membervar = {string_test: '', bool_test=false}` Decorator!***
-    + The `()` after the decorator name means, that it is executed
-    + _Now, angular knows, that we want to hand over the class member variale membervar by the html tag from outside the component!_
-    + To compile the code, you might need to import the Input decorator by adding `Input` to `import { Component, OnInit, Input } from '@angular/core';` of the importing component
-  - ***To hand over the parameters from outside the component, we need to do "Property Binding"! This is done by square brackets***
+  - **_To make one or two way binding of html tag attributes, we need to use the `@Input() membervar = {string_test: '', bool_test=false}` Decorator!_**
+    - The `()` after the decorator name means, that it is executed
+    - _Now, angular knows, that we want to hand over the class member variale membervar by the html tag from outside the component!_
+    - To compile the code, you might need to import the Input decorator by adding `Input` to `import { Component, OnInit, Input } from '@angular/core';` of the importing component
+  - **_To hand over the parameters from outside the component, we need to do "Property Binding"! This is done by square brackets_**
     - Example: `<app-todo [todo_data]="{todo_key: 'testing', todo_status: false}"></app-todo>`
-      * You can also hand over data from the typescript file of the parental component, if it has the correct datastructure! 
-+ Angular directives:
+      - You can also hand over data from the typescript file of the parental component, if it has the correct datastructure!
+- Angular directives:
   - A directive is a build in functiontionallity that can be applied to html tags
-    * Examples: `*ngrepeat`, `*ngfor`, ...
-    * Directives are divided into structural and attributal directives
-+ Event binding with angular:
+    - Examples: `*ngrepeat`, `*ngfor`, ...
+    - Directives are divided into structural and attributal directives
+- Event binding with angular:
   - If we want to do something on an event, we need to use an angular event directive, like `(click)`
-    * These events are normal DOM events
-+ Changing data from the calling html/`component.ts` of a component: Use the `@Output` decorator with an event emitter
+    - These events are normal DOM events
+- Changing data from the calling html/`component.ts` of a component: Use the `@Output` decorator with an event emitter
+
   - Event emitters are generics in typescript (aka templates if you need the regard to C++)
   - The event emitter emits an event with the defined data (datatype by the template argument)
   - We need to bind the emitted event data to a function of the calling html tag to it's typescript class
-    * Example: 
+    - Example:
       - 1.: Emit the data via the `@Output() data = new EventEmitter<number>();` decorator as a class member
       - 2.: Bind the data to a function of the calling component.
-        * `... (todoIndex)="functionNameCallingComponent($event)"></app-component>`
-        * Here we bind the output of the class variable (that is `@Output()` decorated) to the function of the calling `app.component.ts`
-        * The `$event` service gives us the data of the event emitter back
+        - `... (todoIndex)="functionNameCallingComponent($event)"></app-component>`
+        - Here we bind the output of the class variable (that is `@Output()` decorated) to the function of the calling `app.component.ts`
+        - The `$event` service gives us the data of the event emitter back
       - Define the function (i.e. `functionNameCallingComponent(idx: number): void {...}`) within the typescript class of the calling component
 
-+ ***Summary: Letting angular component exchange data***
-  - Square brackets: Used to input data to the `@Input()` decorated class member (Data from the calling component to the called component) 
-  - Round brackets: Used to outout data to the calling component via the `@Output()` decorated class member.
-    * It needs to be handed over via the `$event` angular service as parameter to the assigned function of the calling `*.component.ts`    
+- **_Summary: Letting angular component exchange data_**
 
-+ Input data from HTML `<input>`-Tag:
+  - Square brackets: Used to input data to the `@Input()` decorated class member (Data from the calling component to the called component)
+  - Round brackets: Used to outout data to the calling component via the `@Output()` decorated class member.
+    - It needs to be handed over via the `$event` angular service as parameter to the assigned function of the calling `*.component.ts`
+
+- Input data from HTML `<input>`-Tag:
+
 ```
 <div class="py-2">
     <input type="text" class="w-50 mx-2" (keyup)="setToDo($event)"/>
     <button class="btn btn-dark px-1 py-1" (click)="appendToTodo(this.add_todo_str)">Add</button>
 </div>
 ```
-  * The `keyup` event is an angular directive that triggers the function after every keystroke
-    - The event contains the complete input string (*not* just the last letter that invoked the function)
-  * No input-Binding is done, since we use event handler directives to hand over the data
-    - ***Input Binding is only used if we need to insert members of component classes. If we need to input user inputs, we use input directives!***
-  * `(keyup.enter)="functionName()"` --> Executes the function on pressing enter (e.g. if you want to "Send a message on every enter press")
-  * If you work with user input, make sure that you do some input checking like "No empty inputs"
-+ `localStorage` of a browser instance:
+
+- The `keyup` event is an angular directive that triggers the function after every keystroke
+  - The event contains the complete input string (_not_ just the last letter that invoked the function)
+- No input-Binding is done, since we use event handler directives to hand over the data
+  - **_Input Binding is only used if we need to insert members of component classes. If we need to input user inputs, we use input directives!_**
+- `(keyup.enter)="functionName()"` --> Executes the function on pressing enter (e.g. if you want to "Send a message on every enter press")
+- If you work with user input, make sure that you do some input checking like "No empty inputs"
+
+* `localStorage` of a browser instance:
   - More infos: https://blog.logrocket.com/localstorage-javascript-complete-guide/#:~:text=localStorage%20is%20a%20property%20that,the%20browser%20window%20is%20closed.
   - Is a sqlite database that lives within the browser instance
   - Web apps could save data in there, as long as the browser cache is not deleted
   - We can store data and recover data there
   - Ideally, we save stringified json data in there
-  - ***To recover the data from the localStorage, we can use so called lifecycle hooks:***
-    * `OnInit()` is the lifecycle hook for the starting of your web app (you can also implement lifecycle hooks on closing tabs, etc)
+  - **_To recover the data from the localStorage, we can use so called lifecycle hooks:_**
+    - `OnInit()` is the lifecycle hook for the starting of your web app (you can also implement lifecycle hooks on closing tabs, etc)
       - Add to the component class the `implements OnInit()` extension (see `app.component.ts` for details)
-+ ***Dependency injection and services***:
+* **_Dependency injection and services_**:
   - Services are used to exchange data between component and reuse functions to realize the DRY paradigm
   - Create a service with `$ ng generate service logging`
-  
 
 ## Example: CRUD app ToDo-List
-+ Angular > version 2 gets installed by npm which is a part of nodejs
-+ Since I work with angular 13, ng-bootstrap is not natively supported. We need to install it in the following way:
+
+- Angular > version 2 gets installed by npm which is a part of nodejs
+- Since I work with angular 13, ng-bootstrap is not natively supported. We need to install it in the following way:
   - `$ npm update && npm install --save --legacy-peer-deps @ng-bootstrap/ng-bootstrap && ng add @ng-bootstrap/ng-bootstrap`
   - See https://stackoverflow.com/questions/69433250/install-ngbootstrap-error-could-not-resolve-dependency
   - After doing this, we need to rebuild the project to make the changes working properly (if you don't do this, you'll run into an compiler error)
-    * ***CAUTION:*** After we installed a new package with npm, we need to do a development server hard reset (i.e. we need to stop and restart the dev server with ctrl+c and then start the server again with `$ ng serve`)
-+ If we create new components with `$ ng generate component <name>`, a new folder will be created under the `/src/app/<name>` folder.
+    - **_CAUTION:_** After we installed a new package with npm, we need to do a development server hard reset (i.e. we need to stop and restart the dev server with ctrl+c and then start the server again with `$ ng serve`)
+- If we create new components with `$ ng generate component <name>`, a new folder will be created under the `/src/app/<name>` folder.
   - The `*.spec.ts` file is only for testing (aka unit testing)
 
 # ToDo App
-+ Create a new angular component (additionally to the root component)
+
+- Create a new angular component (additionally to the root component)
   - `$ ng generate component todo`
 
-
 ## Javascript / Typescript Tipps:
-+ Template Strings: 
+
+- Template Strings:
   - Can be used like a bash string!
   - Defined by a backtick instead of a normal tick
-  - Example: 
-    * `console.log("Message: ${this.message}") // does not work, since we do not use backticks`
-    * `console.log(`Message: ${this.message}`) // works`
-      - Requirement: message is a variable (i.e. class member variable) 
-+ Decorator names are written with a capital letter in front of its name
-+ If your typescript code (independend of angular) does not compile while you programmed your own decorator, you need to incomment the line "experimental-decorators" in the `tsconfig.json` file.
-+ Borders of `<div>` tags could be used to generate borders around parts of a container div (like the top section of the todo list)
+  - Example:
+    - `console.log("Message: ${this.message}") // does not work, since we do not use backticks`
+    - `console.log(`Message: ${this.message}`) // works`
+      - Requirement: message is a variable (i.e. class member variable)
+- Decorator names are written with a capital letter in front of its name
+- If your typescript code (independend of angular) does not compile while you programmed your own decorator, you need to incomment the line "experimental-decorators" in the `tsconfig.json` file.
+- Borders of `<div>` tags could be used to generate borders around parts of a container div (like the top section of the todo list)

@@ -1,19 +1,45 @@
 <div class="px-2">
-    <h1 class="text-center text-dark py-3">ToDo List</h1> 
-    <div class="container listcolor px-0 border border-dark border-3 rounded-2" align="center">
-        <div class="border border-dark">
-            <h2 class="py-2">Our ToDos</h2>
-            <p>Open ToDos: {{ getNumOpenTodos() }}</p>
-            <!-- Add section for the todos -->
-            <div class="py-2">
-                <input type="text" class="w-50 mx-2 form-control" (keyup)="setToDo($event)" (keyup.enter)="appendToTodo(this.add_todo_str)" (keyup.enter)="clearEntry()" #entry required [(ngModel)]="inputTextModel" maxlength="19"/>
-                <button class="btn btn-dark px-1 py-1" (click)="appendToTodo(this.add_todo_str)" (click)="clearEntry()">Add</button>
-                <button class="btn btn-danger px-1 py-1 mx-2" (click)="resetAll()">Reset all</button>
-            </div>
-        </div>
-
-        <div class="container px-0" *ngFor="let todo of todo_test; let i = index">
-            <app-todo [todo_data]="todo" [calling_index]="i" (todoIndex)="changeToDoStatus($event)" (todoIndexDelete)="deleteToDo($event)"></app-todo>
-        </div>
+  <h1 class="text-center text-dark py-3">ToDo List</h1>
+  <div
+    class="container listcolor px-0 border border-dark border-3 rounded-2"
+    align="center"
+  >
+    <div class="border border-dark">
+      <h2 class="py-2">Our ToDos</h2>
+      <p>Open ToDos: {{ getNumOpenTodos() }}</p>
+      <!-- Add section for the todos -->
+      <div class="py-2">
+        <input
+          type="text"
+          class="w-50 mx-2 form-control"
+          (keyup)="setToDo($event)"
+          (keyup.enter)="appendToTodo(this.add_todo_str)"
+          (keyup.enter)="clearEntry()"
+          #entry
+          required
+          [(ngModel)]="inputTextModel"
+          maxlength="19"
+        />
+        <button
+          class="btn btn-dark px-1 py-1"
+          (click)="appendToTodo(this.add_todo_str)"
+          (click)="clearEntry()"
+        >
+          Add
+        </button>
+        <button class="btn btn-danger px-1 py-1 mx-2" (click)="resetAll()">
+          Reset all
+        </button>
+      </div>
     </div>
+
+    <div class="container px-0" *ngFor="let todo of todo_test; let i = index">
+      <app-todo
+        [todo_data]="todo"
+        [calling_index]="i"
+        (todoIndex)="changeToDoStatus($event)"
+        (todoIndexDelete)="deleteToDo($event)"
+      ></app-todo>
+    </div>
+  </div>
 </div>

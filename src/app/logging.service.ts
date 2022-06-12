@@ -1,14 +1,13 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoggingService {
-
-  constructor() { }
+  constructor() {}
 
   // service methos
   Log(msg: string): void {
-    console.log(new Date() + ": " + msg);
+    console.log(new Date() + ': ' + msg)
   }
 }
