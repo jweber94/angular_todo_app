@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { LoggingService } from './logging.service';
 
+export class AppModule { }
 
 // needs to be defined to initialize a valid todo_test array with the correct datatype
 interface ITodoElement {
@@ -21,6 +22,8 @@ export class AppComponent implements OnInit{
   constructor (private logger: LoggingService) {
 
   }
+
+  inputTextModel: string = "";
 
   logging(msg: string) {
     this.logger.Log(msg);
