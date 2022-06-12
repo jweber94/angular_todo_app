@@ -14,6 +14,8 @@ You can experiement with it by using an angular development server or you checko
 + npm 8.5.5
 + nodejs v16.15.0
 
++ Install all requirements by executing `$ npm install` from inside the root of this repository. After that, you can use the commands furter down (`ng serve` and `ng build`). 
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
@@ -30,6 +32,8 @@ I needed to type the following:
 
 Make sure to create the `404.html` file in the `/docs` folder to make the github pages deployment work properly. 
 
+## Remarks
++ Form validation of the length is done with the letter ***m***, since it is the longest letter while rendering it in the browser (and therefore need to most space in a row)
+
 ## ToDos
-+ Rename ToDo to Shopping List to make my app a little more unique
 + Dockerize with nginx to run locally in a deployment version
