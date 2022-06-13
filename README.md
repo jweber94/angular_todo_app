@@ -41,4 +41,4 @@ Make sure to create the `404.html` file in the `/docs` folder to make the github
 ## Local deployment
 + Tested with ***docker 20.10.14***
 + Build the image: `$ docker build -t todo_test .`
-+ Run the image: `$ docker run --rm -p 8080:80 todo_test`
++ Run the image: `$ docker run -d --rm -p 8080:80 todo_test`
