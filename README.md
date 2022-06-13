@@ -39,5 +39,5 @@ Make sure to create the `404.html` file in the `/docs` folder to make the github
 - Form validation of the length is done with the letter **_m_**, since it is the longest letter while rendering it in the browser (and therefore need to most space in a row)
 
 ## ToDos
-
+- Testing for Bugs
 - Dockerize with nginx to run locally in a deployment version
